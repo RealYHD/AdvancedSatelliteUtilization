@@ -1,5 +1,7 @@
 package org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference;
 
+import java.util.Random;
+
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,38 +17,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityCoreGenerator extends TileEntity implements ISidedInventory {
 	protected ItemStack[] items = new ItemStack[4];
-	
-	public boolean inputItems;
-	public boolean outputPower;
-	
-	public boolean toggle;
-
-	public boolean multiblock;
-
+	public boolean toggle, multiblock;
 	protected String customName;
-
-	protected int currentfuelqueue;
-
-	private int fuelqueue[];
-
-	public float rotationY;
-
-	public float rotationX;
-
-	public int maxpower;
-
-	public int currentPower;
-
-	protected float speed;
-
-	protected float speedSlower;
-
-	protected int cooldown;
-	
-	public int currentcooldown;
-	
+	public int currentfuelqueue, maxpower, currentPower, cooldown, currentcooldown, fuelqueue[];
+	public float rotationX, rotationY, speed, speedSlower;
 	Item[] validItemByItem;
-	String validItemByString;
+	String validItemByString, particle;
+	protected int x, y, z;
 	
 	@Override
 	public void updateEntity() {
@@ -74,19 +51,17 @@ public class TileEntityCoreGenerator extends TileEntity implements ISidedInvento
 		}
 
 		if (currentPower >= maxpower) {
-			inputItems = false;
 			currentPower = maxpower;
 		}
 		if (currentPower <= 0) {
-			outputPower = false;
 			currentPower = 0;
 		}
 		
-		if (toggle) {
+		if (toggle) {			
 			//Register fuel and such using item and fuel index system
 			if (items[0] != null && this.validItemByItem != null) {
 				for (int i = 0; i < validItemByItem.length; i++) {
-					if (currentfuelqueue <= maxpower - fuelqueue[i] && currentcooldown == 0 && items[0].getItem() == validItemByItem[i]) {
+					if (currentcooldown == 0 && currentfuelqueue <= maxpower - fuelqueue[i] && items[0].getItem() == validItemByItem[i]) {
 						if (items[0].stackSize == 1) {
 							this.items[0] = null;
 						} else {
@@ -145,7 +120,6 @@ public class TileEntityCoreGenerator extends TileEntity implements ISidedInvento
 
 		} else if (toggle == false && speed > 0f) {
 			speed -= 0.0005f;
-
 			speedSlower -= 0.00007f;
 
 		}
@@ -352,5 +326,21 @@ public class TileEntityCoreGenerator extends TileEntity implements ISidedInvento
 		this.validItemByString = string;
 	}
 	
+	public int RetrievePower (int amountofpower) {
+		if (currentPower >= amountofpower) {
+			currentPower = currentPower - amountofpower;
+		}
+		return amountofpower;
+	}
+	
+	public void setCoords(int x, int y, int z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	
+	public void setParticle(String particle) {
+		this.particle = particle;
+	}
+	
 }
-

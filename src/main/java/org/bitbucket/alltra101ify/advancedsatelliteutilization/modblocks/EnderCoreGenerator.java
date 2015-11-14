@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.AdvancedSatelliteUtilization;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modGUIs.ModGUIs;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityCoreStabilizer;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityEnderCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModCreativeTabs;
@@ -39,6 +40,12 @@ public class EnderCoreGenerator extends ModMachineBlock {
 		setHarvestLevel("pickaxe", 2);
 		setLightLevel(0.4f);
 		this.isBlockContainer = true;
+	}
+	
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		((TileEntityCoreGenerator)world.getTileEntity(x, y, z)).setCoords(x, y, z);
+		super.onBlockAdded(world, x, y, z);
 	}
 	
 	@Override
@@ -81,8 +88,22 @@ public class EnderCoreGenerator extends ModMachineBlock {
 	public void isMultiBlock(World world, int x, int y, int z) {
 		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
 			((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).multiblock = true;
+			((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = true;
+			((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = true;
+			world.markBlockForUpdate(x, y+1, z);
+			world.markBlockForUpdate(x, y-1, z);
 		} else {
 			((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).multiblock = false;
+			if (world.getTileEntity(x, y+1, z) instanceof TileEntityCoreStabilizer) {
+				((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = false;
+				((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).version = 0;
+				world.markBlockForUpdate(x, y+1, z);
+			}
+			if (world.getTileEntity(x, y-1, z) instanceof TileEntityCoreStabilizer) {
+				((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = false;
+				((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).version = 0;
+				world.markBlockForUpdate(x, y-1, z);
+			}
 		}
 		world.markBlockForUpdate(x, y, z);
 	}

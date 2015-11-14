@@ -27,35 +27,13 @@ public class Wrench extends Item {
 		setCreativeTab(ModCreativeTabs.TabASU);
 		setUnlocalizedName("WrenchUtility");
 		setMaxStackSize(1);
+		setTextureName(ModInfo.MODID + ":" + getUnlocalizedName().substring(5));
 	}
 	
 	@Override
 	public boolean isFull3D() {
 		return true;
 	}
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister register) {	
-		iconArray = new IIcon[2];
-
-		for (int i = 0; i < iconArray.length; ++i) {
-			iconArray[i] = register.registerIcon(ModInfo.MODID + ":" + "WrenchUtility/" + getUnlocalizedName().substring(5) + i);
-		}
-		
-		this.itemIcon = iconArray[0];
-	}
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(ItemStack stack, int renderPass) {
-		if (stack.stackTagCompound != null && stack.stackTagCompound.getByte("Mode") == -1) {
-			return iconArray[0];
-		} else if (stack.stackTagCompound != null && stack.stackTagCompound.getByte("Mode") != -1) {
-			return iconArray[1];
-		}
-		return iconArray[0];
-	};	
-	
 	@Override
 	public void onCreated(ItemStack itemstack, World world, EntityPlayer player) {
 		NBTSetup(itemstack, world, player);

@@ -1,6 +1,5 @@
 package org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities;
 
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -9,10 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityCoreStabilizer extends TileEntity {
-	World world;
 	
 	public TileEntityCoreStabilizer(World world) {
-		this.world = world;
 	}
 	
 	public TileEntityCoreStabilizer() {
@@ -20,30 +17,19 @@ public class TileEntityCoreStabilizer extends TileEntity {
 	
 	public float rotationY;
 	float speed;
-
-
-	
-	public boolean onOff = false;
-	
-	public boolean multiblock;
 	
 	public byte version;
-	
+	public boolean multiblock;	
 	@Override
 	public void updateEntity() {
-		
-		if (!multiblock && onOff) {
-			onOff = false;
-		}
-		
 		rotationY += speed;
 		if (rotationY >= 6.3f) {
 			rotationY = 0f;
 		}
 
-		if (onOff && speed < 0.055f) {
+		if (multiblock && speed < 0.08f) {
 			speed += 0.001f;
-		} else if (onOff == false && speed > 0f) {
+		} else if (multiblock == false && speed > 0f) {
 			speed -= 0.001f;
 		}
 
@@ -53,7 +39,7 @@ public class TileEntityCoreStabilizer extends TileEntity {
 	public void readFromNBT(NBTTagCompound var1) {
 		this.rotationY = var1.getFloat("rotationY");
 		this.speed = var1.getFloat("speed");
-		this.onOff = var1.getBoolean("onOff");
+		this.multiblock = var1.getBoolean("multiblock");
 		super.readFromNBT(var1);
 	}
 	
@@ -61,7 +47,7 @@ public class TileEntityCoreStabilizer extends TileEntity {
 	public void writeToNBT(NBTTagCompound var1) {
 		var1.setFloat("rotationY", this.rotationY);
 		var1.setFloat("speed", this.speed);
-		var1.setBoolean("onOff", this.onOff);
+		var1.setBoolean("multiblock", this.multiblock);
 		super.writeToNBT(var1);
 	}
 	

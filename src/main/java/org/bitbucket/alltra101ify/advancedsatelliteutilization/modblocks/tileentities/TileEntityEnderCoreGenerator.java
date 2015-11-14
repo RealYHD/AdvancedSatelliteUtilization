@@ -9,6 +9,7 @@ import net.minecraft.nbt.NBTTagList;
 
 public class TileEntityEnderCoreGenerator extends TileEntityCoreGenerator implements ISidedInventory {
 	int[] fuelqueue;
+	
 	public TileEntityEnderCoreGenerator() {
 		fuelqueue = new int[1];
 		fuelqueue[0] = 100;

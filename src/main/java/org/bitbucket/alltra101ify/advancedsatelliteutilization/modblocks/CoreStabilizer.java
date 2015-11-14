@@ -61,26 +61,13 @@ public class CoreStabilizer extends ModMachineBlock {
 	}
 	
 	public void isMultBlock(World world, int x, int y, int z) {
-		
 		if (world.getTileEntity(x, y+1, z) instanceof TileEntityCoreGenerator) {
 			world.scheduleBlockUpdate(x, y+1, z, world.getBlock(x, y+1, z), 0);
-			((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).version = 2;
-			if (((TileEntityCoreGenerator)world.getTileEntity(x, y+1, z)).multiblock == true) {
-				((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).multiblock = true;
-			} else {
-				((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).multiblock = false;
-			}
 		} else if (world.getTileEntity(x, y-1, z) instanceof TileEntityCoreGenerator) {
 			world.scheduleBlockUpdate(x, y-1, z, world.getBlock(x, y-1, z), 0);
-			((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).version = 1;
-			if (((TileEntityCoreGenerator)world.getTileEntity(x, y-1, z)).multiblock == true) {
-				((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).multiblock = true;
-			} else {
-				((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).multiblock = false;
-			}
 		} else {
-			((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).version = 0;
+			((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).multiblock = false;
+			world.markBlockForUpdate(x, y, z);
 		}
-		world.markBlockForUpdate(x, y, z);
 	}
 }

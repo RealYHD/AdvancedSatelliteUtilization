@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.AdvancedSatelliteUtilization;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modGUIs.ModGUIs;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityCoreStabilizer;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityEnderCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityNetherCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems;
@@ -37,7 +38,6 @@ public class NetherCoreGenerator extends ModMachineBlock {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int var) {
-		// TODO Auto-generated method stub
 		return new TileEntityNetherCoreGenerator();
 	}
 	
@@ -51,6 +51,12 @@ public class NetherCoreGenerator extends ModMachineBlock {
 	public void updateTick(World world, int x, int y, int z, Random r) {
 		this.isMultiBlock(world, x, y, z);
 		super.updateTick(world, x, y, z, r);
+	}
+	
+	@Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+		((TileEntityCoreGenerator)world.getTileEntity(x, y, z)).setCoords(x, y, z);
+		super.onBlockAdded(world, x, y, z);
 	}
 	
 	@Override
@@ -74,9 +80,20 @@ public class NetherCoreGenerator extends ModMachineBlock {
 	public void isMultiBlock(World world, int x, int y, int z) {
 		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
 			((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock = true;
-			
+			((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = true;
+			((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = true;
+			world.markBlockForUpdate(x, y+1, z);
+			world.markBlockForUpdate(x, y-1, z);
 		} else {
 			((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock = false;
+			if (world.getTileEntity(x, y+1, z) instanceof TileEntityCoreStabilizer) {
+				((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = false;
+				world.markBlockForUpdate(x, y+1, z);
+			}
+			if (world.getTileEntity(x, y-1, z) instanceof TileEntityCoreStabilizer) {
+				((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = false;
+				world.markBlockForUpdate(x, y-1, z);
+			}
 		}
 		world.markBlockForUpdate(x, y, z);
 	}

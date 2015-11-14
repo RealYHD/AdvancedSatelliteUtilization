@@ -16,6 +16,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiNetherCoreGenerator extends GuiContainer {
+	int scaledtobar, scaledtopercentage, scaledtofueltransfer, currentcooldown, currentpower;
+	
 	private ResourceLocation resource = new ResourceLocation(ModInfo.MODID + ":" + "textures/gui/GUICoreGenerator.png");
 	private TileEntityNetherCoreGenerator tileentity;
 	
@@ -56,24 +58,23 @@ public class GuiNetherCoreGenerator extends GuiContainer {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
 		this.mc.getTextureManager().bindTexture(resource);
-		int scaledtobar = this.tileentity.powerScaled(100);
-		int scaledtopercentage = this.tileentity.powerScaled(100);
-		int scaledtofueltransfer = this.tileentity.genscaled(100);
-		int cooldown = this.tileentity.cooldownscaled(100);
-		int currentpower = this.tileentity.currentPower;
+		scaledtobar = this.tileentity.powerScaled(100);
+		scaledtopercentage = this.tileentity.powerScaled(100);
+		scaledtofueltransfer = this.tileentity.genscaled(100);
+		currentcooldown = this.tileentity.cooldownscaled(100);
+		currentpower = this.tileentity.currentPower;
 		int percentagefontcolor;
-		int White;
 		
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		
 
 		drawTexturedModalRect(guiLeft+7, guiTop+8, 0, 149, scaledtobar, 16);
 		drawTexturedModalRect(guiLeft+7, guiTop+8 + 12, 100, 149, scaledtofueltransfer, 4);
-		drawTexturedModalRect(guiLeft+7, guiTop+8 + 12 + 3, 100, 149 + 4, cooldown, 3);
+		drawTexturedModalRect(guiLeft+7, guiTop+8 + 12 + 3, 100, 149 + 4, currentcooldown, 3);
 
 		
 		drawCenteredString(fontRendererObj, "Nether Core Generator", guiLeft+90, guiTop-10, 0xFFFFFF);
-		if (currentpower ==0) {
+		if (currentpower == 0) {
 			percentagefontcolor = 0xFF0000;
 		} else {
 			percentagefontcolor = 1111111;
@@ -83,8 +84,7 @@ public class GuiNetherCoreGenerator extends GuiContainer {
 		drawString(fontRendererObj, scaledtofueltransfer + "% fuel", guiLeft+40, guiTop+38, percentagefontcolor);
 		
 		if (mx >= guiLeft+7 && mx <= guiLeft +7+100 && my >= guiTop +8 && my <= guiTop + 16 +8) {
-			
-			drawString(fontRendererObj, "Current MoE: " + currentpower + "/" + tileentity.maxpower, mx+10, my, 0xa8a8a8);
+			drawString(fontRendererObj, "MoE: " + currentpower + "/" + tileentity.maxpower, guiLeft+12, guiTop+12, 0xa8a8a8);
 		}
 	}
 }

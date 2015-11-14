@@ -13,15 +13,13 @@ public class TileEntityNetherCoreGenerator extends TileEntityCoreGenerator imple
 	Item[] item;
 	int[] fuel;
 	public TileEntityNetherCoreGenerator() {
-		
 		fuel = new int[1];
 		item = new Item[1];
 		fuel[0] = 110;
 		item[0] = Items.blaze_rod;
-		
+		setParticle("flame");
 		configureVars(fuel, 30000, 125);
-		ItemValidityByItem(item);
-		
+		ItemValidityByItem(item);		
 	}
 	
 	@Override

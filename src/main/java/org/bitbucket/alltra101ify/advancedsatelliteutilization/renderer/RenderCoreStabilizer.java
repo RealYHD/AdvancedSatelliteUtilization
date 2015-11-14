@@ -26,7 +26,7 @@ public class RenderCoreStabilizer extends TileEntitySpecialRenderer {
 		
 		GL11.glTranslatef((float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f);
 		GL11.glRotatef(180, 0f, 0f, 1f);
-		this.bindTexture(texture[tileentity.version]);
+		this.bindTexture(texture[1]);
 
 		modelASU.renderModel(0.0625f);
 
@@ -35,9 +35,9 @@ public class RenderCoreStabilizer extends TileEntitySpecialRenderer {
 	}
 	
 	public  RenderCoreStabilizer() {
-		texture[0] = new ResourceLocation(ModInfo.MODID + ":" + "/textures/models/CoreStabilizer/ModelCoreStabilizer0.png");
-		texture[1] = new ResourceLocation(ModInfo.MODID + ":" + "/textures/models/CoreStabilizer/ModelCoreStabilizer1.png");
-		texture[2] = new ResourceLocation(ModInfo.MODID + ":" + "/textures/models/CoreStabilizer/ModelCoreStabilizer2.png");
+		for (int i = 0; i < texture.length; i++) {
+			texture[i] = new ResourceLocation(ModInfo.MODID + ":" + "/textures/models/CoreStabilizer/ModelCoreStabilizer" + i +".png");
+		}
 	}
 	
 	

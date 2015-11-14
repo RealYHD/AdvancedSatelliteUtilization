@@ -45,7 +45,7 @@ public class ASUCoreTogglePacket implements IMessage {
 		@Override
 		public IMessage onMessage(ASUCoreTogglePacket message, MessageContext ctx) {
 			TileEntity tileentity = ctx.getServerHandler().playerEntity.getEntityWorld().getTileEntity(message.x, message.y, message.z);
-			if (message.toggle == 1) {
+			if (tileentity instanceof TileEntityCoreGenerator && message.toggle == 1) {
 				((TileEntityCoreGenerator)tileentity).toggle = true;
 			} else {
 				((TileEntityCoreGenerator)tileentity).toggle = false;
