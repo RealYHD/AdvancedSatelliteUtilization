@@ -78,7 +78,9 @@ public class NetherCoreGenerator extends ModMachineBlock {
 	}
 	
 	public void isMultiBlock(World world, int x, int y, int z) {
-		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
+		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer_default && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer_default && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
+			world.setBlock(x, y+1, z, ModBlocks.CoreStabilizer_nether);
+			world.setBlock(x, y-1, z, ModBlocks.CoreStabilizer_nether);
 			((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock = true;
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = true;
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = true;
@@ -88,10 +90,12 @@ public class NetherCoreGenerator extends ModMachineBlock {
 			((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock = false;
 			if (world.getTileEntity(x, y+1, z) instanceof TileEntityCoreStabilizer) {
 				((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = false;
+				world.setBlock(x, y+1, z, ModBlocks.CoreStabilizer_default);
 				world.markBlockForUpdate(x, y+1, z);
 			}
 			if (world.getTileEntity(x, y-1, z) instanceof TileEntityCoreStabilizer) {
 				((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = false;
+				world.setBlock(x, y, z, ModBlocks.CoreStabilizer_default);
 				world.markBlockForUpdate(x, y-1, z);
 			}
 		}

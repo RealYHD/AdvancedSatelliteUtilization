@@ -86,7 +86,7 @@ public class EnderCoreGenerator extends ModMachineBlock {
 	}
 	
 	public void isMultiBlock(World world, int x, int y, int z) {
-		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
+		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer_default && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer_default && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
 			((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).multiblock = true;
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = true;
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = true;
