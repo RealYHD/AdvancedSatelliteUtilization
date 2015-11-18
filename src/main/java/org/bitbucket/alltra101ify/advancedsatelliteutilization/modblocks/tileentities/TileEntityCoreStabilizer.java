@@ -8,8 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class TileEntityCoreStabilizer extends TileEntity {
+	byte type;
 	
-	public TileEntityCoreStabilizer(World world) {
+	public TileEntityCoreStabilizer (byte type) {
+		this.type = type;
 	}
 	
 	public TileEntityCoreStabilizer() {
@@ -61,5 +63,9 @@ public class TileEntityCoreStabilizer extends TileEntity {
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		readFromNBT(pkt.func_148857_g());
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public byte getType() {
+		return type;
 	}
 }

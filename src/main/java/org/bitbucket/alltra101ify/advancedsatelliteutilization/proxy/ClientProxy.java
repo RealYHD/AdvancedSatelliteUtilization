@@ -32,10 +32,9 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnderCoreGenerator.class, renderEnderCore);
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.EnderCoreGenerator), new ItemRenderEnderCoreGenerator(renderEnderCore, new TileEntityEnderCoreGenerator()));
 		
-		TileEntitySpecialRenderer renderCoreStabilizer_default = new RenderCoreStabilizer((byte) 0);
-		TileEntitySpecialRenderer renderCoreStabilizer_nether = new RenderCoreStabilizer((byte) 2);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCoreStabilizer.class, renderCoreStabilizer_default);
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.CoreStabilizer_default), new ItemRenderCoreStabilizer(renderCoreStabilizer_default, new TileEntityCoreStabilizer()));
+		TileEntitySpecialRenderer renderCoreStabilizer = new RenderCoreStabilizer();
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCoreStabilizer.class, renderCoreStabilizer);
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.CoreStabilizer), new ItemRenderCoreStabilizer(renderCoreStabilizer, new TileEntityCoreStabilizer()));
 		
 		TileEntitySpecialRenderer renderNetherCore = new RenderNetherCoreGenerator();
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityNetherCoreGenerator.class, renderNetherCore);

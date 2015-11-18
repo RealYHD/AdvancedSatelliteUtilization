@@ -36,7 +36,7 @@ public class RenderCoreStabilizer extends TileEntitySpecialRenderer {
 		
 	}
 	
-	public  RenderCoreStabilizer(byte type) {
+	public  RenderCoreStabilizer() {
 		for (int i = 0; i < texture.length; i++) {
 			texture[i] = new ResourceLocation(ModInfo.MODID + ":" + "/textures/models/CoreStabilizer/ModelCoreStabilizer" + i +".png");
 		}

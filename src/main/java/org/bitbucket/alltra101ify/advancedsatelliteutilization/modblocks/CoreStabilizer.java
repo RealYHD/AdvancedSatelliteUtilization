@@ -16,8 +16,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class CoreStabilizer extends ModMachineBlock {
-	byte type;
-	protected CoreStabilizer(byte type) {
+	protected CoreStabilizer() {
 		super(Material.rock);
 		setBlockName("CoreStabilizer");
 		setBlockTextureName(ModInfo.MODID + ":" + getUnlocalizedName().substring(5));
@@ -25,12 +24,11 @@ public class CoreStabilizer extends ModMachineBlock {
 		setResistance(8);
 		setHardness(8);
 		setHarvestLevel("pickaxe", 2);
-		this.type = type;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int var) {
-		return new TileEntityCoreStabilizer(world);
+		return new TileEntityCoreStabilizer();
 	}
 	
 	public int getRenderType() {
@@ -51,7 +49,7 @@ public class CoreStabilizer extends ModMachineBlock {
 			isMultBlock(world, x, y, z);
 		}
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.wrench) {
-			int[] info = this.wrenched(player, world, x, y, z, false, 0, (byte) 0, new ItemStack(ModBlocks.CoreStabilizer_default, 1));
+			int[] info = this.wrenched(player, world, x, y, z, false, 0, (byte) 0, new ItemStack(ModBlocks.CoreStabilizer, 1));
 		}
 		return true;
 	}
