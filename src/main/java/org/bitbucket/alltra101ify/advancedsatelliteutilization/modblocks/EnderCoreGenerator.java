@@ -10,7 +10,7 @@ import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModCreativeTabs;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModInfo;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.ModMachineBlock;
-import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityGenerator;
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
@@ -44,7 +44,7 @@ public class EnderCoreGenerator extends ModMachineBlock {
 	
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
-		((TileEntityCoreGenerator)world.getTileEntity(x, y, z)).setCoords(x, y, z);
+		((TileEntityGenerator)world.getTileEntity(x, y, z)).setCoords(x, y, z);
 		super.onBlockAdded(world, x, y, z);
 	}
 	
@@ -69,7 +69,7 @@ public class EnderCoreGenerator extends ModMachineBlock {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.wrench) {
-			int[] info = this.wrenched(player, world, x, y, z, ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).multiblock, ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).currentPower, (byte) ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).powerScaled(100), new ItemStack(ModBlocks.EnderCoreGenerator, 1));
+			int[] info = this.wrenched(player, world, x, y, z, ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).multiblock, (int) ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).currentPower, (byte) ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).powerScaled(100), new ItemStack(ModBlocks.EnderCoreGenerator, 1));
 			switch (info[1]) {
 			
 			case 0:	((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).currentPower = info[0];
@@ -81,8 +81,9 @@ public class EnderCoreGenerator extends ModMachineBlock {
 			}
 		} else if (world.getTileEntity(x, y, z) != null && ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).humanInterface() && !world.isRemote && ((TileEntityEnderCoreGenerator)world.getTileEntity(x, y, z)).multiblock) {
 				FMLNetworkHandler.openGui(player, AdvancedSatelliteUtilization.instance, ModGUIs.ENDERCOREGENERATORID, world, x, y, z);
+				return true;
 			}
-		return true;
+		return false;
 	}
 	
 	public void isMultiBlock(World world, int x, int y, int z) {
@@ -106,6 +107,19 @@ public class EnderCoreGenerator extends ModMachineBlock {
 			}
 		}
 		world.markBlockForUpdate(x, y, z);
+	}
+	
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 
 }

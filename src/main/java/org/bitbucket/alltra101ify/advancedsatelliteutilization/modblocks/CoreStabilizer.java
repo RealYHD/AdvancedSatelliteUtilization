@@ -5,7 +5,7 @@ import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModCreativeTabs;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModInfo;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.ModMachineBlock;
-import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityGenerator;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -51,7 +51,7 @@ public class CoreStabilizer extends ModMachineBlock {
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.wrench) {
 			int[] info = this.wrenched(player, world, x, y, z, false, 0, (byte) 0, new ItemStack(ModBlocks.CoreStabilizer, 1));
 		}
-		return true;
+		return false;
 	}
 	
 	@Override
@@ -61,13 +61,15 @@ public class CoreStabilizer extends ModMachineBlock {
 	}
 	
 	public void isMultBlock(World world, int x, int y, int z) {
-		if (world.getTileEntity(x, y+1, z) instanceof TileEntityCoreGenerator) {
+		if (world.getTileEntity(x, y+1, z) instanceof TileEntityGenerator) {
 			world.scheduleBlockUpdate(x, y+1, z, world.getBlock(x, y+1, z), 0);
-		} else if (world.getTileEntity(x, y-1, z) instanceof TileEntityCoreGenerator) {
+		} else if (world.getTileEntity(x, y-1, z) instanceof TileEntityGenerator) {
 			world.scheduleBlockUpdate(x, y-1, z, world.getBlock(x, y-1, z), 0);
 		} else {
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y, z)).multiblock = false;
 			world.markBlockForUpdate(x, y, z);
 		}
 	}
+	
+	
 }

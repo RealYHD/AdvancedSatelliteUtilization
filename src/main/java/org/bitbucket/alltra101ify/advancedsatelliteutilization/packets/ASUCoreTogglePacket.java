@@ -2,7 +2,7 @@ package org.bitbucket.alltra101ify.advancedsatelliteutilization.packets;
 
 import net.minecraft.tileentity.TileEntity;
 
-import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityGenerator;
 
 import io.netty.buffer.ByteBuf;
 import cpw.mods.fml.common.network.ByteBufUtils;
@@ -45,10 +45,10 @@ public class ASUCoreTogglePacket implements IMessage {
 		@Override
 		public IMessage onMessage(ASUCoreTogglePacket message, MessageContext ctx) {
 			TileEntity tileentity = ctx.getServerHandler().playerEntity.getEntityWorld().getTileEntity(message.x, message.y, message.z);
-			if (tileentity instanceof TileEntityCoreGenerator && message.toggle == 1) {
-				((TileEntityCoreGenerator)tileentity).toggle = true;
+			if (tileentity instanceof TileEntityGenerator && message.toggle == 1) {
+				((TileEntityGenerator)tileentity).toggle = true;
 			} else {
-				((TileEntityCoreGenerator)tileentity).toggle = false;
+				((TileEntityGenerator)tileentity).toggle = false;
 			}
 			return null;
 		}

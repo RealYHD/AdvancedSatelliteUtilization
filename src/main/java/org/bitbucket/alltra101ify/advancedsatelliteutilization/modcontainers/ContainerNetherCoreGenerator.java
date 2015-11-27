@@ -16,8 +16,7 @@ public class ContainerNetherCoreGenerator extends Container {
 
 	private TileEntityNetherCoreGenerator nethercoregenerator;
 	
-	public ContainerNetherCoreGenerator(InventoryPlayer inventoryplayer,
-			TileEntityNetherCoreGenerator tileentity) {
+	public ContainerNetherCoreGenerator(InventoryPlayer inventoryplayer, TileEntityNetherCoreGenerator tileentity) {
 		this.nethercoregenerator = tileentity;
 
 		this.addSlotToContainer(new NetherCoreGeneratorSlot(tileentity, INPUT_1, 7, 28, tileentity));

@@ -18,7 +18,9 @@ import net.minecraft.world.World;
 
 public class GuiEnderCoreGenerator extends GuiContainer {
 	
-	int scaledtobar, scaledtopercentage, scaledtofueltransfer, currentcooldown, currentpower;
+	int scaledtobar, scaledtopercentage, scaledtofueltransfer, currentcooldown;
+
+	float currentpower;
 	
 	private ResourceLocation resource = new ResourceLocation(ModInfo.MODID + ":" + "textures/gui/GuiCoreGenerator.png");
 	private TileEntityEnderCoreGenerator tileentity;

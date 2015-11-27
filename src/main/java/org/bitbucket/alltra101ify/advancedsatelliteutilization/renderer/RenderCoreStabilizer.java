@@ -13,8 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 
 public class RenderCoreStabilizer extends TileEntitySpecialRenderer {
-	byte type;
-	
+
 	private ModelCoreStabilizer modelASU = new ModelCoreStabilizer();
 	public static ResourceLocation[] texture = new ResourceLocation[3];
 	public void renderTileEntityAt(TileEntityCoreStabilizer tileentity, double x,
@@ -28,7 +27,7 @@ public class RenderCoreStabilizer extends TileEntitySpecialRenderer {
 		
 		GL11.glTranslatef((float) x + 0.5f, (float) y + 1.5f, (float) z + 0.5f);
 		GL11.glRotatef(180, 0f, 0f, 1f);
-		this.bindTexture(texture[type]);
+		this.bindTexture(texture[1]);
 
 		modelASU.renderModel(0.0625f);
 

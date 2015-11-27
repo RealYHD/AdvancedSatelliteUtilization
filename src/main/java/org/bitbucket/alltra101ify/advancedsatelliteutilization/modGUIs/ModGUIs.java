@@ -4,5 +4,6 @@ public class ModGUIs {
 	
 	public static final byte ENDERCOREGENERATORID = 0;
 	public static final byte NETHERCOREGENERATORID = 1;
+	public static final byte ADVANCEDWASTEHANDLERID = 2;
 	
 }

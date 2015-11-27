@@ -9,16 +9,15 @@ import net.minecraft.item.ItemStack;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityEnderCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modcontainers.modslots.EnderCoreGeneratorSlot;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems;
-import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityGenerator;
 
 public class ContainerEnderCoreGenerator extends Container {
 
-	public static final int INPUT_1 = 0;
+	public static final byte INPUT_1 = 0;
 
 	public TileEntityEnderCoreGenerator endercoregenerator;
 
-	public ContainerEnderCoreGenerator(InventoryPlayer inventoryplayer,
-			TileEntityEnderCoreGenerator tileentity) {
+	public ContainerEnderCoreGenerator(InventoryPlayer inventoryplayer, TileEntityEnderCoreGenerator tileentity) {
 		this.endercoregenerator = tileentity;
 
 		this.addSlotToContainer(new EnderCoreGeneratorSlot(tileentity, INPUT_1, 7, 28, tileentity));

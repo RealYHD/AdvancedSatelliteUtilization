@@ -1,7 +1,9 @@
 package org.bitbucket.alltra101ify.advancedsatelliteutilization.modGUIs;
 
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityAdvancedWasteHandler;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityEnderCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityNetherCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.modcontainers.ContainerAdvancedWasteHandler;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modcontainers.ContainerEnderCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modcontainers.ContainerNetherCoreGenerator;
 
@@ -20,6 +22,8 @@ public class ASUGuiHandler implements IGuiHandler {
 		case ModGUIs.ENDERCOREGENERATORID: if (tileentity instanceof TileEntityEnderCoreGenerator) returned = new ContainerEnderCoreGenerator(player.inventory, (TileEntityEnderCoreGenerator)tileentity);
 		break;
 		case ModGUIs.NETHERCOREGENERATORID: if (tileentity instanceof TileEntityNetherCoreGenerator) returned = new ContainerNetherCoreGenerator(player.inventory, (TileEntityNetherCoreGenerator)tileentity);
+		break;
+		case ModGUIs.ADVANCEDWASTEHANDLERID: if (tileentity instanceof TileEntityAdvancedWasteHandler) returned = new ContainerAdvancedWasteHandler(player.inventory, (TileEntityAdvancedWasteHandler)tileentity);
 		}
 		
 		return returned;
@@ -37,6 +41,7 @@ public class ASUGuiHandler implements IGuiHandler {
 		break;
 		case ModGUIs.NETHERCOREGENERATORID: if (tileentity instanceof TileEntityNetherCoreGenerator) returned = new GuiNetherCoreGenerator(player.inventory, (TileEntityNetherCoreGenerator)tileentity);
 		break;
+		case ModGUIs.ADVANCEDWASTEHANDLERID: if (tileentity instanceof TileEntityAdvancedWasteHandler) returned = new GuiAdvancedWasteHandler(player.inventory, (TileEntityAdvancedWasteHandler)tileentity);
 		}
 		
 		return returned;

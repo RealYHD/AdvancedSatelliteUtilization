@@ -17,11 +17,22 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 
 public abstract class ModMachineBlock extends BlockContainer {
-
 	protected ModMachineBlock(Material material) {
 		super(material);
 	}
-	
+	/**
+	 * 
+	 * @param player EntityPlayer
+	 * @param world world
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param z z coordinate
+	 * @param multiblock if this is a multiblock or not. If does not belong to a multiblock, always true.
+	 * @param currentPower current power of the block. For debugging purposes.
+	 * @param scale percentage of power
+	 * @param itemtogive item to return when using wrench to break
+	 * @return returns 1 on array [1] on servers if it is valid for opening gui while 2 is for destroying and giving item to player. array [0] is to set the new power.
+	 */
 	public int[] wrenched(EntityPlayer player, World world, int x, int y, int z, boolean multiblock, int currentPower, byte scale, ItemStack itemtogive) {
 		int[] info = new int[2];
 		info[0] = currentPower;
@@ -55,19 +66,6 @@ public abstract class ModMachineBlock extends BlockContainer {
 
 		}
 		return info;
-	}
-	
-	@Override
-	public int getRenderType() {
-		return -1;
-	}
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
 	
 }

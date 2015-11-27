@@ -18,7 +18,7 @@ import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModCreativeTabs;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModInfo;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.ModMachineBlock;
-import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.moditemblockreference.TileEntityGenerator;
 
 import cpw.mods.fml.common.network.internal.FMLNetworkHandler;
 
@@ -55,14 +55,14 @@ public class NetherCoreGenerator extends ModMachineBlock {
 	
 	@Override
 	public void onBlockAdded(World world, int x, int y, int z) {
-		((TileEntityCoreGenerator)world.getTileEntity(x, y, z)).setCoords(x, y, z);
+		((TileEntityGenerator)world.getTileEntity(x, y, z)).setCoords(x, y, z);
 		super.onBlockAdded(world, x, y, z);
 	}
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == ModItems.wrench) {
-			int[] info = this.wrenched(player, world, x, y, z, ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock, ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).currentPower, (byte) ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).powerScaled(100), new ItemStack(ModBlocks.netherCoreGenerator, 1));
+			int[] info = this.wrenched(player, world, x, y, z, ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock, (int) ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).currentPower, (byte) ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).powerScaled(100), new ItemStack(ModBlocks.netherCoreGenerator, 1));
 			switch (info[1]) {
 			
 			case 0:	((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).currentPower = info[0];
@@ -73,14 +73,13 @@ public class NetherCoreGenerator extends ModMachineBlock {
 			}
 		} else if (world.getTileEntity(x, y, z) != null && ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).humanInterface() && !world.isRemote && ((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock) {
 			FMLNetworkHandler.openGui(player, AdvancedSatelliteUtilization.instance, ModGUIs.NETHERCOREGENERATORID, world, x, y, z);
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public void isMultiBlock(World world, int x, int y, int z) {
 		if (world.getBlock(x, y+1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-1, z) == ModBlocks.CoreStabilizer && world.getBlock(x, y-2, z) == ModBlocks.blockofashadwithquaridium && world.getBlock(x, y+2, z) == ModBlocks.blockofashadwithquaridium) {
-			world.setBlock(x, y+1, z, ModBlocks.CoreStabilizer);
-			world.setBlock(x, y-1, z, ModBlocks.CoreStabilizer);
 			((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock = true;
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = true;
 			((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = true;
@@ -90,16 +89,26 @@ public class NetherCoreGenerator extends ModMachineBlock {
 			((TileEntityNetherCoreGenerator)world.getTileEntity(x, y, z)).multiblock = false;
 			if (world.getTileEntity(x, y+1, z) instanceof TileEntityCoreStabilizer) {
 				((TileEntityCoreStabilizer)world.getTileEntity(x, y+1, z)).multiblock = false;
-				world.setBlock(x, y+1, z, ModBlocks.CoreStabilizer);
 				world.markBlockForUpdate(x, y+1, z);
 			}
 			if (world.getTileEntity(x, y-1, z) instanceof TileEntityCoreStabilizer) {
 				((TileEntityCoreStabilizer)world.getTileEntity(x, y-1, z)).multiblock = false;
-				world.setBlock(x, y, z, ModBlocks.CoreStabilizer);
 				world.markBlockForUpdate(x, y-1, z);
 			}
 		}
 		world.markBlockForUpdate(x, y, z);
+	}
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 	
 }

@@ -16,7 +16,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiNetherCoreGenerator extends GuiContainer {
-	int scaledtobar, scaledtopercentage, scaledtofueltransfer, currentcooldown, currentpower;
+	int scaledtobar, scaledtopercentage, scaledtofueltransfer, currentcooldown;
+
+	float currentpower;
 	
 	private ResourceLocation resource = new ResourceLocation(ModInfo.MODID + ":" + "textures/gui/GUICoreGenerator.png");
 	private TileEntityNetherCoreGenerator tileentity;
