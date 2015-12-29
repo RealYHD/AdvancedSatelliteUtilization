@@ -19,6 +19,10 @@ public class ModItems {
 	public static Item humanInterfaceGate = new HumanInterfaceGate();
 	public static Item conversionSpeedUpgrade = new ConversionSpeedUpgrade();
 	public static Item fanModule = new FanModule();
+	public static Item PCBTemplate = new PCBTemplate((byte) 0);
+	public static Item PCBTemplate_Tier1Control = new PCBTemplate((byte) 1);
+	public static Item PCBTemplate_Tier2Control = new PCBTemplate((byte) 2);
+	public static Item PCBTemplate_Tier3Control = new PCBTemplate((byte) 3);
 	
 	public static void itemInit() {
 		ASURegistryHelper.registerItem(basicChip);
@@ -33,6 +37,10 @@ public class ModItems {
 		ASURegistryHelper.registerItem(humanInterfaceGate);
 		ASURegistryHelper.registerItem(conversionSpeedUpgrade);
 		ASURegistryHelper.registerItem(fanModule);
+		ASURegistryHelper.registerItem(PCBTemplate);
+		ASURegistryHelper.registerItem(PCBTemplate_Tier1Control);
+		ASURegistryHelper.registerItem(PCBTemplate_Tier2Control);
+		ASURegistryHelper.registerItem(PCBTemplate_Tier3Control);
 		
 	}
 }

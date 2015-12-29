@@ -38,6 +38,7 @@ public class ASUCrafting {
 		GameRegistry.addSmelting(ModBlocks.quaridiumOre, new ItemStack(ModItems.quaridiumIngot ), 0.5f);
 		
 		
+		
 		GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.blockofashadwithquaridium), ashadbrick, ashadbrick, ashadbrick, ashadbrick, ashadbrick, quaridiumingot, quaridiumingot, quaridiumingot, quaridiumingot);
 		
 		
