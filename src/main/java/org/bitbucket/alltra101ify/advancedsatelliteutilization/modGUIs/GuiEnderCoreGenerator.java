@@ -77,7 +77,7 @@ public class GuiEnderCoreGenerator extends GuiContainer {
 		drawTexturedModalRect(guiLeft+7, guiTop+8 + 12 + 3, 100, 149 + 4, currentcooldown, 3);
 
 		
-		drawCenteredString(fontRendererObj, "Ender Core Generator", guiLeft+90, guiTop-10, 0xFFFFFF);
+		drawCenteredString(fontRendererObj, "Ender Core Generator", guiLeft+90, guiTop+7, 0xFFFFFF);
 		if (currentpower == 0) {
 			percentagefontcolor = 0xFF0000;
 		} else {

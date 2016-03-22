@@ -23,7 +23,7 @@ public class TileEntityGenerator extends TileEntity implements ISidedInventory {
 	public float FuelConversionSpeed, currentfuelqueue, currentPower;
 	public float rotationX, rotationY, speed, speedSlower;
 	Item[] validItemByItem;
-	String validItemByString, particle;
+	String validItemByString;
 	protected int x, y, z;
 	@Override
 	public void updateEntity() {
@@ -333,7 +333,6 @@ public class TileEntityGenerator extends TileEntity implements ISidedInventory {
 		this.validItemByItem = item;
 	}
 	/**
-	 * 
 	 * @param string (should only be used for testing as there is very little control) Sets what is valid by name of item.
 	 */
 	public void itemValidityByString(String string) {
@@ -351,10 +350,6 @@ public class TileEntityGenerator extends TileEntity implements ISidedInventory {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-	}
-	
-	public void setParticle(String particle) {
-		this.particle = particle;
 	}
 	
 	@Override

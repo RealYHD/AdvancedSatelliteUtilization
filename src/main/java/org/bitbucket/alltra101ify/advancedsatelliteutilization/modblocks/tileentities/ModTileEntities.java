@@ -11,6 +11,8 @@ public class ModTileEntities {
 		ASURegistryHelper.registerTileEntity(TileEntityNetherCoreGenerator.class, "NetherCore");
 		ASURegistryHelper.registerTileEntity(TileEntityAdvancedWasteHandler.class, "AdvancedWasteHandler_true");
 		ASURegistryHelper.registerTileEntity(TileEntityAdvancedWasteHandler.class, "AdvancedWasteHandler_false");
+		ASURegistryHelper.registerTileEntity(TileEntityFrameProjector.class, "FrameProjector_false");
+		ASURegistryHelper.registerTileEntity(TileEntityFrameProjector.class, "FrameProjector_true");
 	}
 	
 }

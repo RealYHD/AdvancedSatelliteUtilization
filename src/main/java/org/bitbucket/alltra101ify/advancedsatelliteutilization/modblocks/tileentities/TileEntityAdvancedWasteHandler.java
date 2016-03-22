@@ -13,7 +13,7 @@ public class TileEntityAdvancedWasteHandler extends TileEntityGenerator implemen
 	Item item[] = new Item[6];
 	public TileEntityAdvancedWasteHandler() {
 		for (int i = 0; i < fuelqueue.length; i++) {
-			fuelqueue[i] = 5;
+			fuelqueue[i] = 3;
 		}
 		
 		item[0] = Items.bone;

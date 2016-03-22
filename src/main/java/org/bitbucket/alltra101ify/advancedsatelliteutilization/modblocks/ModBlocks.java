@@ -17,6 +17,9 @@ public class ModBlocks {
 	public static Block quaridiumOre = new QuaridiumOre(Material.iron);
 	public static Block blockofashadwithquaridium = new blockOfASHADWithQuaridium(Material.iron);
 	public static Block netherCoreGenerator = new NetherCoreGenerator();
+	public static Block frameSupport = new FrameSupport();
+	public static Block frameProjector_False = new FrameProjector(false);
+	public static Block frameProjector_True = new FrameProjector(true);
 	public static void blockInit() {
 		ASURegistryHelper.registerBlock(blockofashad);
 		ASURegistryHelper.registerBlock(transparentblockofashad);
@@ -29,5 +32,8 @@ public class ModBlocks {
 		ASURegistryHelper.registerBlock(netherCoreGenerator);
 		ASURegistryHelper.registerBlock(AdvancedWasteHandler);
 		ASURegistryHelper.registerBlock(AdvancedWasteHandler_active);
+		ASURegistryHelper.registerBlock(frameSupport);
+		ASURegistryHelper.registerBlock(frameProjector_False);
+		ASURegistryHelper.registerBlock(frameProjector_True);
 	}
 }

@@ -6,6 +6,7 @@ import org.bitbucket.alltra101ify.advancedsatelliteutilization.AdvancedSatellite
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modGUIs.ModGUIs;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityAdvancedWasteHandler;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityEnderCoreGenerator;
+import org.bitbucket.alltra101ify.advancedsatelliteutilization.modblocks.tileentities.TileEntityNetherCoreGenerator;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.moditems.ModItems;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModCreativeTabs;
 import org.bitbucket.alltra101ify.advancedsatelliteutilization.reference.ModInfo;
@@ -19,10 +20,12 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -156,5 +159,41 @@ public class AdvancedWasteHandler extends ModMachineBlock {
 		}
 		super.randomDisplayTick(world, x, y, z, r);
 	}
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block b, int i) {
+		DropItems(world, x, y, z);
+		super.breakBlock(world, x, y, z, b, i);
+	}
 	
+	public void DropItems(World world, int x, int y, int z) {
+		Random r = new Random();
+		TileEntityAdvancedWasteHandler tileentity = ((TileEntityAdvancedWasteHandler)world.getTileEntity(x, y, z));
+		for (int i = 0; i < tileentity.getSizeInventory(); i++) {
+			ItemStack itemstack = tileentity.getStackInSlot(i);
+			if (itemstack != null) {
+				float rand[] = new float[3];
+				for (int i1 = 0; i1 < 3; i1++) {
+					rand[i1] = r.nextFloat() * 0.8F + 0.1F;
+				}
+				while (itemstack.stackSize > 0) {
+					int j1 = r.nextInt(21) + 10;
+					
+					if (j1 > itemstack.stackSize) {
+						j1 = itemstack.stackSize;
+					}
+					itemstack.stackSize -= j1;
+					EntityItem entityitem = new EntityItem(world, x + rand[0], y + rand[1], z + rand[2], new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
+					
+					if (itemstack.hasTagCompound()) {
+						entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
+					}
+					 float f3 = 0.05F;
+					 entityitem.motionX = r.nextGaussian() * f3;
+					 entityitem.motionY = r.nextGaussian() * f3 + 0.2f;
+					 entityitem.motionZ = r.nextGaussian() * f3;
+					 world.spawnEntityInWorld(entityitem);
+				}
+			}
+		}
+	}
 }

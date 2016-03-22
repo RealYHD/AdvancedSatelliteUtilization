@@ -27,4 +27,6 @@ tile.BlockOfASHADWithQuaridium.name=Block of ASHAD with Quaridium
 tile.NetherCoreGenerator.name=Nether Core Generator
 tile.AdvancedWasteHandler_false.name=Advanced Waste Disposer
 tile.AdvancedWasteHandler_true.name=Advanced Waste Disposer
+tile.FrameSupport.name=Frame Support
+tile.FrameProjector_false.name=Frame Projector
 itemGroup.asu=Advanced Satellite Utilization

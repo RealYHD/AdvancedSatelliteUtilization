@@ -23,10 +23,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import org.lwjgl.opengl.GL11;
 
-//
-// GuiBuffBar implements a simple status bar at the top of the screen which 
-// shows the current buffs/debuffs applied to the character.
-//
 public class GuiWrenchOverlay extends Gui
 {
   private Minecraft mc;
@@ -38,7 +34,6 @@ public class GuiWrenchOverlay extends Gui
   {
     super();
     
-    // We need this to invoke the render engine.
     this.mc = mc;
   }
 
@@ -83,5 +78,5 @@ public class GuiWrenchOverlay extends Gui
 	  } else {
 		  this.drawTexturedModalRect(xPos-12, yPos, XSTART - 12, YSTART, XSIZE, YSIZE);
 	  }
-  }
+   }
 }

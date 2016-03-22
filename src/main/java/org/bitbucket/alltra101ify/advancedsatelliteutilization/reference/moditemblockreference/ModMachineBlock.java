@@ -21,7 +21,6 @@ public abstract class ModMachineBlock extends BlockContainer {
 		super(material);
 	}
 	/**
-	 * 
 	 * @param player EntityPlayer
 	 * @param world world
 	 * @param x x coordinate
@@ -31,7 +30,7 @@ public abstract class ModMachineBlock extends BlockContainer {
 	 * @param currentPower current power of the block. For debugging purposes.
 	 * @param scale percentage of power
 	 * @param itemtogive item to return when using wrench to break
-	 * @return returns 1 on array [1] on servers if it is valid for opening gui while 2 is for destroying and giving item to player. array [0] is to set the new power.
+	 * @return returns 1 on array [1] on servers if it is valid for opening gui while 2 is for destroying and giving item to player. Array [0] is to set the new power.
 	 */
 	public int[] wrenched(EntityPlayer player, World world, int x, int y, int z, boolean multiblock, int currentPower, byte scale, ItemStack itemtogive) {
 		int[] info = new int[2];
@@ -67,5 +66,4 @@ public abstract class ModMachineBlock extends BlockContainer {
 		}
 		return info;
 	}
-	
 }
